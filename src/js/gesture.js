@@ -96,11 +96,54 @@ export const LANDMARKS = {
       console.error('Argument is not valid. a, b, c, must be values between 0 and 20, and b=a+1, and c=b+1.');
     }
   }
+  
 
-  // 
+// Getting landmarks from mediapipe.js
+export function onLandmarksDetected(landmarksArray) {
+
+    // landmarksArray = array of hands
+    const landmarks = landmarksArray[0];
+    if (!landmarks) return;
+
+    // Normalize landmarks (removes hand size & position differences)
+    const normalizedLandmarks = normalizeLandmarks(landmarks);
+
+    // NEXT STEP (later):
+    // extractFeatures(normalizedLandmarks);
+}
 
 
-  // Measure the angle between two joints:
+// Normalized function
+function normalizeLandmarks(landmarks) {
+
+    // Use wrist as origin
+    const wrist = landmarks[LANDMARKS.WRIST];
+
+    const shifted = landmarks.map(point => ({
+        x: point.x - wrist.x,
+        y: point.y - wrist.y,
+        z: point.z - wrist.z
+    }));
 
 
+    // Use wrist to point 9 (middle MCP) as scale reference
+    const middleMCP = landmarks[LANDMARKS.MIDDLE_FINGER_MCP];
 
+    const scale = Math.sqrt(
+        (middleMCP.x - wrist.x) ** 2 +
+        (middleMCP.y - wrist.y) ** 2 +
+        (middleMCP.z - wrist.z) ** 2
+    );
+
+    if (scale === 0) return shifted;
+
+
+    // Scale all points
+    const normalized = shifted.map(point => ({
+        x: point.x / scale,
+        y: point.y / scale,
+        z: point.z / scale
+    }));
+
+    return normalized;
+}
