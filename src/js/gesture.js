@@ -59,27 +59,44 @@ export const LANDMARKS = {
 
   // Dot product between two functions
   function dot(v1, v2) {
-    return v1.x * v2.x + v1.y * v2.y + v1.z * v2.z;
+    return v1[0] * v2[0] + v1[1] * v2[1] + v1[2] * v2[2];
+  }
+
+  // Function to get the magnitude of a 3D vector
+  function magnitude_3D(vector) {
+    return Math.sqrt((vector[0]**2) + (vector[1]**2) + (vector[2]**2))
   }
 
   // Calculate the angle of a joint:
   // Input: landmarks array from MediaPipe, and specific landmarks a, b, and c
-  export function getAngleOfJoint(landmarks, a, b, c) {
+  export function get_angle_of_joint(landmarks, a, b, c) {
 
-    // Check if landmarks a, b, c and sequential
-
-    // Get the vectors from a to b, and from c to b
+    // Check if landmarks a, b, c and sequential (i.e. on the same finger?)
+    if( ( ((1 <= a <= 4) && (1 <= b <= 4) && (1 <= a <= 4))         // Check if all landmarks are on THUMB
+      || ((5 <= a <= 8) && (5 <= b <= 8) && (5 <= a <= 8))          // Check if all landmarks are on INDEX
+      || ((9 <= a <= 12) && (9 <= b <= 12) && (9 <= a <= 12))       // Check if all landmarks are on MIDDLE
+      || ((13 <= a <= 16) && (13 <= b <= 16) && (13 <= a <= 16))    // Check if all landmarks are on RING
+      || ((17 <= a <= 20) && (17 <= b <= 20) && (17 <= a <= 20)) )  // Check if all landmarks are on PINKY
+       && (b == a-1) && c == b-1) {                                 // Check is all landmakrs are sequential
+      // Get the vectors from a to b, and from c to b
     const vector1 = vector(landmarks[a], landmarks[b]);
     const vector2 = vector(landmarks[c], landmarks[b]);
 
-    // Calculate the angle between vector1 and vector2
-    const cosTheta = 
-        dot(vector1, vector2)
+    // Calculate the angle between vector1 and vector2, and return
+    const cosTheta = dot(vector1, vector2) / (magnitude_3D(vector1) * magnitude_3D(vector2));
+    return Math.acos(cosTheta)
+    //
+    /* 
+      Maybe for numerical safety should do this instead?:
+      const clamped = Math.min(1, Math.max(-1, cosTheta));
 
-    // This is not done yet
+    return Math.acos(clamped) * (180 / Math.PI);
+    */
+    } else {
+      console.error('Argument is not valid. a, b, c, must be values between 0 and 20, and b=a+1, and c=b+1.');
+    }
   }
 
-  // Or wait, should I just 
 
   // Measure the angle between two joints:
 
