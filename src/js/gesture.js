@@ -99,7 +99,6 @@ export const LANDMARKS = {
   }
   
 
-<<<<<<< Updated upstream
 // Getting landmarks from mediapipe.js
 export function onLandmarksDetected(landmarksArray) {
 
@@ -113,9 +112,7 @@ export function onLandmarksDetected(landmarksArray) {
     // NEXT STEP (later):
     // extractFeatures(normalizedLandmarks);
 }
-=======
   // Calcul
->>>>>>> Stashed changes
 
 
 // Normalized function
