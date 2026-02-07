@@ -1,13 +1,24 @@
 import {registerUser, loginUser} from "./auth.js";
+import {auth} from "./firebase.js";
+import { onAuthStateChanged } from "firebase/auth";
+
+onAuthStateChanged(auth, (user)=> {
+    if (user) {
+        console.log("User still logged in: ", user.uid);
+    }
+    else {
+        console.log("No user logged in");
+    }
+})
+const regForm = document.querySelector("#regForm");
 
 //SIGN UP
-alert("Register clicked");
-const regForm= document.querySelector("#regForm");
-
+if (regForm){
 regForm.addEventListener("submit", async (e) => { //when submitted function runs here 
     e.preventDefault(); //prevent refresh after submit 
 
-    const email = document.querySelector("regUsername").value ;
+    
+    const email = document.querySelector("#regUsername").value ;
     const password = document.querySelector("#regPassword").value ;
     const confirmPassword = document.querySelector("#confirmPassword").value ;
 
@@ -22,7 +33,8 @@ regForm.addEventListener("submit", async (e) => { //when submitted function runs
     } catch (error) {
         console.error("Error: ", error.message);
     }
-});
+
+}); }
 
 //LOG IN
 const loginForm= document.querySelector("#loginForm");
@@ -33,7 +45,7 @@ if(loginForm){
 
         const email = document.querySelector("#logUsername").value ;
         const password = document.querySelector("#logPassword").value ;
-        const rememberMe = document.querySelector("#remember").value ;
+        const rememberMe = document.querySelector("#remember").checked ;
 
         try{
             const user = await loginUser(email, password, rememberMe);
