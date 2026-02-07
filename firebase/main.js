@@ -1,6 +1,7 @@
 import {registerUser, loginUser} from "./auth.js";
 
 //SIGN UP
+alert("Register clicked");
 const regForm= document.querySelector("#regForm");
 
 regForm.addEventListener("submit", async (e) => { //when submitted function runs here 
