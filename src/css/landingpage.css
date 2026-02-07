@@ -122,3 +122,8 @@ h4 {
     font-size: 3rem;
     margin-bottom: 10px;
 }
+.auth-buttons {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* spacing between buttons */
+}
