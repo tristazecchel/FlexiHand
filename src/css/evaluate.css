@@ -1,0 +1,279 @@
+:root {
+    --bg-gradient: linear-gradient(135deg, #e0f7f6 0%, #b2ecea 100%);
+    --card-bg: rgba(255, 255, 255, 0.7);
+    --accent: #20b2aa;
+    --text-dark: #2d4a49;
+    --text-dim: #5f8583;
+    --white: #ffffff;
+}
+
+body {
+    background: var(--bg-gradient);
+    background-attachment: fixed;
+    color: var(--text-dark);
+    font-family: 'Segoe UI', sans-serif;
+    margin: 0;
+    padding: 20px;
+    min-height: 100vh;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 40px;
+    background: var(--card-bg);
+    backdrop-filter: blur(10px);
+    border-radius: 15px;
+    margin-bottom: 40px;
+    border: 1px solid rgba(255,255,255,0.5);
+}
+
+.logo { font-size: 24px; font-weight: 800; color: var(--accent); }
+
+.container { max-width: 1000px; margin: 0 auto; }
+
+.top-row {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 25px;
+}
+
+.card {
+    background: var(--card-bg);
+    backdrop-filter: blur(12px);
+    border-radius: 20px;
+    padding: 30px;
+    border: 1px solid rgba(255,255,255,0.5);
+    box-shadow: 0 8px 32px rgba(31, 135, 130, 0.1);
+}
+
+.center { text-align: center; }
+
+/* Chart Styling */
+.chart-container {
+    height: 140px;
+    display: flex;
+    align-items: flex-end;
+    gap: 12px;
+    border-bottom: 2px solid rgba(0,0,0,0.05);
+}
+
+.bar {
+    flex: 1;
+    background: var(--accent);
+    border-radius: 6px 6px 0 0;
+    transition: height 1s ease-out;
+}
+
+/* Circular Progress */
+.circle-progress {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    border: 8px solid var(--white);
+    border-top: 8px solid var(--accent);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 10px auto;
+}
+
+/* Lesson Section */
+.lesson-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: var(--card-bg);
+    padding: 25px;
+    border-radius: 15px;
+}
+
+.lesson-info { width: 65%; }
+
+.progress-bar-bg {
+    height: 10px;
+    background: var(--white);
+    border-radius: 5px;
+    margin-top: 10px;
+    overflow: hidden;
+}
+
+.progress-fill {
+    width: 0%;
+    height: 100%;
+    background: var(--accent);
+    transition: width 1s ease;
+}
+
+.btn-flex {
+    background: var(--accent);
+    color: var(--white);
+    border: none;
+    padding: 15px 30px;
+    border-radius: 10px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.btn-flex:hover { transform: translateY(-2px); opacity: 0.9; }
+/* Navbar Link Styling */
+.nav-links {
+    display: flex;
+    gap: 15px;
+    background: rgba(255, 255, 255, 0.3);
+    padding: 5px;
+    border-radius: 50px;
+    border: 1px solid var(--glass-border);
+}
+
+.nav-item {
+    text-decoration: none;
+    color: var(--text-dark);
+    font-weight: 600;
+    padding: 10px 22px;
+    border-radius: 50px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    font-size: 0.95rem;
+}
+
+/* Hover State */
+.nav-item:hover {
+    background: rgba(255, 255, 255, 0.5);
+    color: var(--accent);
+}
+
+/* Active State (Current Page) */
+.nav-item.active {
+    background: var(--accent);
+    color: white;
+    box-shadow: 0 4px 12px rgba(32, 178, 170, 0.3);
+}
+
+/* Ensuring the logo stands out */
+.logo {
+    font-size: 24px;
+    font-weight: 800;
+    color: var(--accent);
+    text-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+3. Updated script.js (Optional Interaction)
+If you want the buttons to "switch" the active look when clicked (even if you're staying on one page for now), you can add this:
+
+JavaScript
+const navItems = document.querySelectorAll('.nav-item');
+
+navItems.forEach(item => {
+    item.addEventListener('click', function(e) {
+        // Remove active class from all
+        navItems.forEach(nav => nav.classList.remove('active'));
+        // Add to clicked item
+        this.classList.add('active');
+    });
+});
+.camera-box {
+    position: relative;
+    width: 100%;
+    height: 200px;
+    margin: 15px 0;
+    border-radius: 12px;
+    overflow: hidden;
+    background: #000;
+    border: 3px solid var(--accent);
+    box-shadow: 0 4px 20px rgba(32, 178, 170, 0.2);
+}
+
+#webcam {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transform: scaleX(-1);
+}
+
+.scanning-line {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: var(--accent);
+    opacity: 0.6;
+    box-shadow: 0 0 15px var(--accent);
+    animation: scan 2.5s ease-in-out infinite;
+}
+
+@keyframes scan {
+    0% { top: 0%; }
+    50% { top: 98%; }
+    100% { top: 0%; }
+}
+.header-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.camera-box {
+    position: relative;
+    width: 100%;
+    height: 250px;
+    background: #000;
+    border-radius: 12px;
+    margin-bottom: 20px;
+    border: 2px solid var(--accent);
+    overflow: hidden;
+}
+
+#webcam {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transform: scaleX(-1);
+}
+
+/* Make sure the chart and camera don't feel too crowded */
+.chart-container {
+    margin-top: 10px;
+}
+.header-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.camera-box {
+    position: relative;
+    width: 100%;
+    height: 250px;
+    background: #000;
+    border-radius: 12px;
+    margin-bottom: 20px;
+    border: 2px solid var(--accent);
+    overflow: hidden;
+    transition: all 0.5s ease;
+}
+
+#webcam {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transform: scaleX(-1); /* Mirrored for hand-tracking intuition */
+}
+
+.scanning-line {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: var(--accent);
+    box-shadow: 0 0 15px var(--accent);
+    animation: scan 2s linear infinite;
+}
+
+@keyframes scan {
+    0% { top: 0%; }
+    100% { top: 100%; }
+}
