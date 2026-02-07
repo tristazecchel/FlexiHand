@@ -33,7 +33,7 @@ export const LANDMARKS = {
 
   };
 
-  // Function to get the distance between two points, a and b
+  // Function to get the distance between two points, a and b (in ))
   function getDistance(a, b) {
     return Math.sqrt(
       (a.x - b.x) ** 2 +
@@ -77,7 +77,8 @@ export const LANDMARKS = {
       || ((9 <= a <= 12) && (9 <= b <= 12) && (9 <= a <= 12))       // Check if all landmarks are on MIDDLE
       || ((13 <= a <= 16) && (13 <= b <= 16) && (13 <= a <= 16))    // Check if all landmarks are on RING
       || ((17 <= a <= 20) && (17 <= b <= 20) && (17 <= a <= 20)) )  // Check if all landmarks are on PINKY
-       && (b == a-1) && c == b-1) {                                 // Check is all landmakrs are sequential
+       && ( ((b == a+1) && (c == b+1)) || ((a == 0) && (c == c+1)) ) )
+       {                                 // Check is all landmakrs are sequential
       // Get the vectors from a to b, and from c to b
     const vector1 = getVector(landmarks[a], landmarks[b]);
     const vector2 = getVector(landmarks[c], landmarks[b]);
@@ -98,6 +99,7 @@ export const LANDMARKS = {
   }
   
 
+<<<<<<< Updated upstream
 // Getting landmarks from mediapipe.js
 export function onLandmarksDetected(landmarksArray) {
 
@@ -111,6 +113,9 @@ export function onLandmarksDetected(landmarksArray) {
     // NEXT STEP (later):
     // extractFeatures(normalizedLandmarks);
 }
+=======
+  // Calcul
+>>>>>>> Stashed changes
 
 
 // Normalized function
