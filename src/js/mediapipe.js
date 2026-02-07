@@ -52,6 +52,7 @@ export function drawResults(canvas, video, results) {
     ctx.drawImage(video, 0, 0, canvas.width, canvas.height); // Draw
 
     if (results.landmarks && results.landmark.length > 0) { // Checking if 1 hand is detected
+        // Results.landmark: array of type "hands" that each has "x, y, z" -> holds the coordinates of each landmark
         ctx.fillStyle = "red" // Dots are red
         results.landmark[0].forEach((point) => { // Only for the first detected hand, goes through all landmarks
             ctx.beginPath();
@@ -70,6 +71,7 @@ export async function runHandLandmarker(onLandmarksDetected) {
     async function onFrame() {
         const results = handLandmarker.detectForVideo(video, Date.now()); // Runs hand detection on the current video frame
         if (canvas) drawResults(canvas, results); // Calls drawing function
+
         if (results.landmarks && results.landmarks.length > 0) {
             onLandmarksDetected(results.landmarks);
         }
