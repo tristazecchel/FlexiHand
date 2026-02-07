@@ -34,7 +34,7 @@ export const LANDMARKS = {
   };
 
   // Function to get the distance between two points, a and b
-  function get_distance(a, b) {
+  function getDistance(a, b) {
     return Math.sqrt(
       (a.x - b.x) ** 2 +
       (a.y - b.y) ** 2 +
@@ -43,7 +43,7 @@ export const LANDMARKS = {
   }
 
   // Caluculate the vector of the line between two landmarks, a and b:
-  function get_vector() {
+  function getVector() {
     // return a dictionary which represents the vector
     /*
     return {
@@ -63,13 +63,13 @@ export const LANDMARKS = {
   }
 
   // Function to get the magnitude of a 3D vector
-  function magnitude_3D(vector) {
+  function magnitude3D(vector) {
     return Math.sqrt((vector[0]**2) + (vector[1]**2) + (vector[2]**2))
   }
 
   // Calculate the angle of a joint:
   // Input: landmarks array from MediaPipe, and specific landmarks a, b, and c
-  export function get_angle_of_joint(landmarks, a, b, c) {
+  export function getAngleOfJoint(landmarks, a, b, c) {
 
     // Check if landmarks a, b, c and sequential (i.e. on the same finger?)
     if( ( ((1 <= a <= 4) && (1 <= b <= 4) && (1 <= a <= 4))         // Check if all landmarks are on THUMB
@@ -79,11 +79,11 @@ export const LANDMARKS = {
       || ((17 <= a <= 20) && (17 <= b <= 20) && (17 <= a <= 20)) )  // Check if all landmarks are on PINKY
        && (b == a-1) && c == b-1) {                                 // Check is all landmakrs are sequential
       // Get the vectors from a to b, and from c to b
-    const vector1 = vector(landmarks[a], landmarks[b]);
-    const vector2 = vector(landmarks[c], landmarks[b]);
+    const vector1 = getVector(landmarks[a], landmarks[b]);
+    const vector2 = getVector(landmarks[c], landmarks[b]);
 
     // Calculate the angle between vector1 and vector2, and return
-    const cosTheta = dot(vector1, vector2) / (magnitude_3D(vector1) * magnitude_3D(vector2));
+    const cosTheta = dot(vector1, vector2) / (magnitude3D(vector1) * magnitude3D(vector2));
     return Math.acos(cosTheta)
     //
     /* 
@@ -97,7 +97,10 @@ export const LANDMARKS = {
     }
   }
 
+  // 
+
 
   // Measure the angle between two joints:
+
 
 
