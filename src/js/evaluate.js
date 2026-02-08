@@ -2,7 +2,10 @@ import { setupWebcam, runHandLandmarker } from './mediapipe.js';
 import { normalizeLandmarks } from './gesture.js';
 import { referenceGestures } from './referenceGestures.js';
 import { compareGesture } from './gestureComparison.js';
-import { auth } from "../../firebase/firebase.js";
+
+// ✅ FIXED IMPORTS
+import { auth, db } from "../../firebase/firebase.js";
+import { addDoc, collection, serverTimestamp } from "firebase/firestore";
 
 document.addEventListener('DOMContentLoaded', () => {
     const flexBtn = document.getElementById('flexBtn');
