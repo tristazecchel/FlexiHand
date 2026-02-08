@@ -75,7 +75,7 @@ if(loginForm){
             localStorage.removeItem("loginAttempts");
 
             //redirect after log in (***NEED TO CHANGE!!!***)
-            window.location.href= "/src/html/index.html";
+            window.location.href= "/src/html/evaluate.html";
         }
         catch(error){
             
@@ -105,4 +105,12 @@ if(loginForm){
             }
         }
     });
-}
+    //forgot password 
+    const forgotButton = document.getElementById("forgotpass");
+
+    if (forgotButton){
+        forgotButton.addEventListener("click",()=>{
+            window.location.href = "/forgot_password.html";
+        })
+    }
+    }
