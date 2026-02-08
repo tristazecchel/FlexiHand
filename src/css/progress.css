@@ -121,3 +121,29 @@ nav {
     align-items: center;
     margin: 15px auto;
 }
+nav {
+    display: flex;
+    justify-content: space-between; /* Logo far left, nav-links far right */
+    align-items: center;
+    padding: 12px 40px;
+    background: var(--card-bg);
+    backdrop-filter: blur(10px);
+    border-radius: 15px;
+    margin-bottom: 40px;
+    border: 1px solid rgba(255,255,255,0.5);
+}
+
+.logo {
+    font-size: 24px;
+    font-weight: 800;
+    color: var(--accent);
+    flex-shrink: 0; /* Prevent logo from shrinking */
+}
+
+.nav-links {
+    display: flex;
+    gap: 10px; /* space between nav items */
+    background: rgba(255, 255, 255, 0.3);
+    padding: 5px;
+    border-radius: 50px;
+    flex-shrink: 0; /* Prevent nav links from squeezing */
