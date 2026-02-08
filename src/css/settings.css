@@ -1,4 +1,8 @@
+
+
 :root {
+    box-sizing: border-box;
+    font-family: "Segoe UI", sans-serif;
     --bg-gradient: linear-gradient(135deg, #e0f7f6 0%, #b2ecea 100%);
     --card-bg: rgba(255, 255, 255, 0.7);
     --accent: #20b2aa;
@@ -29,6 +33,71 @@ nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    padding: 15px 40px;
+    background: rgba(255, 255, 255, 0.6);
+    backdrop-filter: blur(10px);
+}
+
+.nav-links {
+    margin-left: auto;
+    margin: 0 15px;
+    display: flex;
+    align-items: center;
+}
+
+.logo {
+    font-size: 20px;
+    font-weight: 800;
+    color: #0bb7a7;
+}
+
+.nav-right a {
+    text-decoration: none;
+    color: #0f2f33;
+    padding: 8px 18px;
+    border-radius: 30px;
+    font-weight: 600;
+}
+
+/*
+.logo {
+    font-size: 20px;
+    font-weight: 800;
+    color: #0bb7a7;
+}
+
+.nav-right {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.nav-right a {
+    text-decoration: none;
+    color: #0f2f33;
+    padding: 8px 18px;
+    border-radius: 30px;
+    font-weight: 600;
+}
+
+.nav-right .active {
+    background: #20b2aa;
+    color: white;
+}
+
+#logoutBtn {
+    background: rgba(255,255,255,0.6);
+    border: none;
+    padding: 8px 12px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+    */
+/*
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     padding: 12px 40px;
     background: var(--card-bg);
     backdrop-filter: blur(10px);
@@ -38,11 +107,13 @@ nav {
 }
 
 .nav-links a {
+    margin-left: auto;
     color: var(--text-dim);
     text-decoration: none;
     margin: 0 15px;
     font-weight: 500;
 }
+    */
 
 /* Container */
 .settings-container {

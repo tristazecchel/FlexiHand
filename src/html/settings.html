@@ -9,17 +9,69 @@
 <body>
     <nav class="navbar">
         <div class="logo">🌊 FlexiHand</div>
-        <div class="nav-links">
-            <a href="#" class="nav-item active">Learn</a>
-            <a href="#" class="nav-item">Progress</a>
-            <a href="#" class="nav-item">Profile</a>
+        <div class="nav-right">
+            <a href="#">Evaluate</a>
+            <a href="#">Progress</a>
+            <a href="#" class="active">Profile</a>
+            <button id="logoutBtn">⚙️</button>
         </div>
-        <div class="settings-icon">⚙️</div>
     </nav>
 
     <main class="settings-container">
         <h1>Settings</h1>
+        <form id="settingsForm" action="/submitSettings" method="post">
 
+            <section class="settings-group">
+                <h3>Account</h3>
+                <div class="input-card">
+                    <div class="field">
+                        <label>Username</label>
+                        <input type="text" name="username" value="username">
+                    </div>
+        
+                    <div class="field">
+                        <label>Email</label>
+                        <input type="email" name="email" value="address@domain.xyz">
+                    </div>
+        
+                    <div class="field">
+                        <label>Password</label>
+                        <input type="password" name="password">
+                    </div>
+                </div>
+            </section>
+        
+            <section class="settings-group">
+                <h3>Learning Preferences</h3>
+                <div class="input-card">
+                    <label>Daily Goal</label>
+                    <select name="dailyGoal">
+                        <option value="0">Choose an option</option>
+                        <option value="1">Casual</option>
+                        <option value="3">Regular</option>
+                        <option value="5">Serious</option>
+                    </select>
+        
+                    <label>Reminder Time</label>
+                    <input type="time" name="reminderTime">
+                </div>
+            </section>
+        
+            <section class="settings-group">
+                <h3 class="danger-text">Danger Zone</h3>
+                <div class="input-card danger-border">
+                    <input type="radio" name="proceed" value="yes"> Yes
+                    <input type="radio" name="proceed" value="no"> No
+                </div>
+            </section>
+        
+            <div class="actions">
+                <button type="submit" class="btn-logout">Save Settings</button>
+            </div>
+        
+        </form>
+        
+        <!--
         <section class="settings-group">
             <h3>Account</h3>
             <div class="input-card">
@@ -47,20 +99,21 @@
                     <div class="field row">
                         <div class="label-group">
                             <label>Daily Goal</label>
-                            <p class="subtext">How many lessons per day</p>
+                            <p class="subtext">How many lessons per day?</p>
+                            <select id="dailyGoal" id="dailyGoal" name="dailyGoal" value="How many lessons per day?">
+                                <option value="0">Chose an option</option>
+                                <option value="1">Casual (1 lesson)</option>
+                                <option value="3">Regular (3 lessons)</option>
+                                <option value="5">Serious (5 lessons)</option>
+                            </select>
                         </div>
-                        <select id="dailyGoal">
-                            <option value="1">Casual (1 lesson)</option>
-                            <option value="3">Regular (3 lessons)</option>
-                            <option value="5">Serious (5 lessons)</option>
-                        </select>
                     </div>
                     <div class="field row">
                         <div class="label-group">
                             <label>Reminder Time</label>
-                            <p class="subtext">Daily practice reminder</p>
+                            <p class="subtext">Daily practice reminder time</p>
+                            <input type="time" id="time" name="time" value="X:XX">
                         </div>
-                        <input type="time" value="09:00">
                     </div>
                 </form>
             </div>
@@ -71,8 +124,10 @@
             <div class="input-card danger-border">
                 <div class="field row">
                     <div class="label-group">
-                        <label>Delete Account</label>
-                        <p class="subtext">Permanently delete your account and data</p>
+                        <input type="radio" id="yes" name="proceed" value="yes">
+                        <label for="yes">Yes (Y)</label><br>
+                        <input type="radio" id="no" name="proceed" value="no">
+                        <label for="no">No (N)</label><br>
                     </div>
                     <button class="btn-delete">Delete</button>
                 </div>
@@ -85,5 +140,6 @@
     </main>
 
     <script src="../js/settings.js"></script>
+    -->
 </body>
 </html>
