@@ -2,6 +2,7 @@ import { setupWebcam, runHandLandmarker } from './mediapipe.js';
 import { normalizeLandmarks } from './gesture.js';
 import { referenceGestures } from './referenceGestures.js';
 import { compareGesture } from './gestureComparison.js';
+import { auth } from "../../firebase/firebase.js";
 
 document.addEventListener('DOMContentLoaded', () => {
     const flexBtn = document.getElementById('flexBtn');
@@ -253,14 +254,53 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    function finishEvaluation() {
-        stopTimer();
-        scoringUI.style.display = 'none';
-        liveScoreEl.style.display = 'none';
+   async function finishEvaluation() {
+    stopTimer();
+    scoringUI.style.display = 'none';
+    liveScoreEl.style.display = 'none';
 
-        alert('Evaluation complete! Check console for results.');
-        console.log('Evaluation Results:', results);
-        localStorage.setItem('evaluationResults', JSON.stringify(results));
+    alert('Evaluation complete! Check console for results.');
+    console.log('Evaluation Results:', results);
+
+    console.log("FINISH EVALUATION CALLED");
+    console.log("Current user:", auth.currentUser);
+
+    const user = auth.currentUser;
+
+    if (user) {
+        try {
+            await addDoc(
+                collection(db, "users", user.uid, "evaluations"),
+                {
+                    exercises: results,
+                    createdAt: serverTimestamp()
+                }
+            );
+
+            console.log("Evaluation saved to Firestore");
+
+        } catch (error) {
+            console.error("Error saving evaluation:", error);
+        }
+    } else {
+        console.log("Null");
+    }
+
+    // Reset session
+    currentTestIndex = 0;
+    results = [];
+    cameraContainer.style.display = 'none';
+    referenceContainer.style.display = 'none';
+    updateCircleProgress(0);
+
+    flexBtn.innerText = "Start Flexing";
+    flexBtn.style.background = '';
+
+    if (stream) {
+        stream.getTracks().forEach(t => t.stop());
+        stream = null;
+    }
+}
 
         // Reset
         currentTestIndex = 0;
@@ -276,4 +316,4 @@ document.addEventListener('DOMContentLoaded', () => {
             stream = null;
         }
     }
-});
+);
