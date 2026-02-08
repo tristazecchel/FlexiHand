@@ -44,6 +44,34 @@ async function init() { // Starting MediaPipe loop
 
 init();
 
+// EXERCISE
+// Score an exercise
+export function scoreExercise(exerciseName) {
+    if (!latestLandmarks) {
+        alert("No hand detected. Try again.");
+        return;
+    }
+
+    const normalized = normalizeLandmarks(latestLandmarks);
+    const reference = referenceGestures[exerciseName];
+
+    if (!reference) {
+        alert(`No reference saved for ${exerciseName}`);
+        return;
+    }
+
+    const percent = compareGesture(normalized, reference);
+
+    alert(`Your score for ${exerciseName}: ${percent}%`);
+
+    // Ask user for difficulty rating 1-10
+    let difficulty = prompt("Rate the difficulty of this exercise (1-10):");
+    difficulty = Math.min(Math.max(parseInt(difficulty), 1), 10); // clamp
+
+    console.log(`Exercise: ${exerciseName}, Score: ${percent}%, Difficulty: ${difficulty}`);
+}
+
+
 // Record reference function
 export function recordReference(exerciseName) {
 
@@ -66,15 +94,13 @@ export function recordReference(exerciseName) {
 
 window.recordReference = recordReference;
 
+// EXERCISE BUTTONS
+document.getElementById('btnScoreOpenPalm').addEventListener('click', () => scoreExercise('openPalm'));
+document.getElementById('btnScoreClosedFist').addEventListener('click', () => scoreExercise('closedFist'));
+
 // Onclick call
-document.getElementById('btnOpenPalm').addEventListener('click', () => recordReference('openPalm'));
-document.getElementById('btnClosedFist').addEventListener('click', () => recordReference('closedFist'));
-document.getElementById('btnHook').addEventListener('click', () => recordReference('hook'));
-document.getElementById('btnTabletop').addEventListener('click', () => recordReference('tabletop'));
-document.getElementById('btnThumbBent').addEventListener('click', () => recordReference('thumbBent'));
-
-document.getElementById('btnPrint').addEventListener('click', () => {
-    console.log("Copy into referenceData.js: ");
-
-    console.log(JSON.stringify(referenceGestures, null, 2));
-});
+//document.getElementById('btnOpenPalm').addEventListener('click', () => recordReference('openPalm'));
+//document.getElementById('btnClosedFist').addEventListener('click', () => recordReference('closedFist'));
+//document.getElementById('btnHook').addEventListener('click', () => recordReference('hook'));
+//document.getElementById('btnTabletop').addEventListener('click', () => recordReference('tabletop'));
+//document.getElementById('btnThumbBent').addEventListener('click', () => recordReference('thumbBent'));
