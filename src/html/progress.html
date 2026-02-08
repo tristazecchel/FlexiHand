@@ -4,53 +4,63 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FlexiHand - Progress</title>
+
+    <!-- Correct relative CSS path -->
     <link rel="stylesheet" href="../css/progress.css">
 </head>
 <body>
 
-    <nav>
-        <div class="logo">🌊 FlexiHand</div>
-        <div class="nav-links">
-    <a href="#" class="nav-item">Evaluate</a>
-    <a href="#" class="nav-item active">Progress</a>
-    <a href="#" class="nav-item">Profile</a>
-    <a href="#" class="nav-item" id="settingsBtn">⚙️</a> <!-- New Settings Button -->
-</div>
-    </nav>
+<nav>
+    <div class="logo">🌊 FlexiHand</div>
+    <div class="nav-links">
+        <!-- Since this file is inside src/html/,
+             we only use filenames -->
+        <a href="evaluate.html" class="nav-item">Evaluate</a>
+        <a href="progress.html" class="nav-item active">Progress</a>
+        <a href="profile.html" class="nav-item">Profile</a>
+        <a href="settings.html" class="nav-item">⚙️</a>
+    </div>
+</nav>
 
-    <div class="container">
-        <h1>Your Progress</h1>
+<div class="container">
+    <h1>Your Progress</h1>
 
-        <div class="dashboard-grid">
-            <div class="card">
-                <div class="card-header">
-                    <h3>This Week</h3>
-                    <button class="btn-flex-sm" id="flexBtn">Start Flexing</button>
-                </div>
-                
-                <div id="cameraContainer" class="camera-box" style="display: none;">
-                    <video id="webcam" autoplay playsinline></video>
-                    <div class="scanning-line"></div>
-                </div>
-
-                <div class="chart-container" id="activityChart">
-                    </div>
-                <p class="chart-label">Minutes practiced per day</p>
+    <div class="dashboard-grid">
+        <div class="card">
+            <div class="card-header">
+                <h3>This Week</h3>
+                <button class="btn-flex-sm" id="flexBtn">Start Flexing</button>
             </div>
 
-            <div class="card center">
-                <h3>Total Progress</h3>
-                <div class="circle-progress">
-                    <span id="totalPercent">0%</span>
-                    <small>Complete</small>
-                </div>
-                <div class="progress-bar-container">
-                    <div class="progress-fill" id="challengeProgress"></div>
-                </div>
+            <div id="cameraContainer" class="camera-box" style="display: none;">
+                <video id="webcam" autoplay playsinline></video>
+                <div class="scanning-line"></div>
+            </div>
+
+            <div class="chart-container" id="activityChart">
+                <!-- Chart will be inserted by JS -->
+            </div>
+
+            <p class="chart-label">Minutes practiced per day</p>
+        </div>
+
+        <div class="card center">
+            <h3>Total Progress</h3>
+
+            <div class="circle-progress">
+                <span id="totalPercent">0%</span>
+                <small>Complete</small>
+            </div>
+
+            <div class="progress-bar-container">
+                <div class="progress-fill" id="challengeProgress"></div>
             </div>
         </div>
     </div>
+</div>
 
-    <script src="../js/progress.js"></script>
+<!-- Correct relative JS path -->
+<script type="module" src="../js/progress.js"></script>
+
 </body>
 </html>

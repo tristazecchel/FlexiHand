@@ -32,6 +32,7 @@ regForm.addEventListener("submit", async (e) => { //when submitted function runs
     try {
         const user = await registerUser(email,password);
         console.log("Registered as: ", user.uid);
+        window.location.href= "/src/html/evaluate.html";
     } catch (error) {
         console.error("Error: ", error.message);
     }
