@@ -1,16 +1,34 @@
 document.addEventListener('DOMContentLoaded', () => {
     
-    // Log Out functionality
-    const logoutBtn = document.getElementById('logoutBtn');
-    logoutBtn.addEventListener('click', () => {
-        const confirmLogout = confirm("Are you sure you want to log out?");
-        if (confirmLogout) {
-            alert("Logging out...");
-            // Redirect logic would go here
-        }
-    });
+    // LOGIN BUTTON
+    const loginBtn = document.getElementById('loginBtn');
+    if (loginBtn) {
+        loginBtn.addEventListener('click', () => {
+            window.location.href = "/log_in.html";
+        });
+    }
 
-    // Interaction for Feature Cards
+    // SIGNUP BUTTON
+    const signupBtn = document.getElementById('signupBtn');
+    if (signupBtn) {
+        signupBtn.addEventListener('click', () => {
+            window.location.href = "/sign_up.html";
+        });
+    }
+
+    // LOG OUT BUTTON
+    const logoutBtn = document.getElementById('logoutBtn');
+    if (logoutBtn) {
+        logoutBtn.addEventListener('click', () => {
+            const confirmLogout = confirm("Are you sure you want to log out?");
+            if (confirmLogout) {
+                alert("Logging out...");
+                // Later we’ll add Firebase signOut here
+            }
+        });
+    }
+
+    // Feature Cards
     const cards = document.querySelectorAll('.card');
     
     cards.forEach(card => {
