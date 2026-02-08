@@ -1,6 +1,6 @@
 import { runHandLandmarker, setupWebcam } from './mediapipe.js';
 import { normalizeLandmarks } from './gesture.js';
-import { referenceGestures } from './referenceGestures.js';
+import { saveReferenceGesture } from './referenceGestures.js';
 
 
 let videoElement;
@@ -54,7 +54,8 @@ export function recordReference(exerciseName) {
 
     const normalized = normalizeLandmarks(latestLandmarks);
 
-    referenceGestures[exerciseName] = normalized;
+    // Save to localStorage via referenceGestures
+    saveReferenceGesture(exerciseName, normalized);
 
     console.log("Captured for: ", exerciseName);
     console.log(JSON.stringify(normalized));
