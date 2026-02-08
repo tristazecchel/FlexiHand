@@ -14,31 +14,38 @@ onAuthStateChanged(auth, (user)=> {
 })
 const regForm = document.querySelector("#regForm");
 
-//SIGN UP
-if (regForm){
-regForm.addEventListener("submit", async (e) => { //when submitted function runs here 
-    e.preventDefault(); //prevent refresh after submit 
+// SIGN UP
+if (regForm) {
+  regForm.addEventListener("submit", async (e) => {
+    e.preventDefault();
 
-    
-    const email = document.querySelector("#regUsername").value ;
-    const password = document.querySelector("#regPassword").value ;
-    const confirmPassword = document.querySelector("#confirmPassword").value ;
+    const email = document.querySelector("#regUsername").value;
+    const password = document.querySelector("#regPassword").value;
+    const confirmPassword = document.querySelector("#confirmPassword").value;
 
-    //checking if passwords match 
+    const errorMessage = document.querySelector("#errorMessage");
+
+    // Reset message first
+    errorMessage.style.display = "none";
+    errorMessage.textContent = "";
+
+    // Check if passwords match
     if (password !== confirmPassword) {
-        console.error("Please match the passwords");
-        return;
+      errorMessage.textContent = "Passwords do not match.";
+      errorMessage.style.display = "block";
+      return;
     }
+
     try {
-        const user = await registerUser(email,password);
-        console.log("Registered as: ", user.uid);
-        window.location.href= "/src/html/evaluate.html";
+      const user = await registerUser(email, password);
+      console.log("Registered as: ", user.uid);
+      window.location.href = "/src/html/evaluate.html";
     } catch (error) {
-        console.error("Error: ", error.message);
+      errorMessage.textContent = error.message;
+      errorMessage.style.display = "block";
     }
-
-}); }
-
+  });
+}
 //LOG IN
 const loginForm= document.querySelector("#loginForm");
 
