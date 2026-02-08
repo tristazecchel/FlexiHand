@@ -43,19 +43,13 @@ export const LANDMARKS = {
   }
 
   // Caluculate the vector of the line between two landmarks, a and b:
-  function getVector() {
-    // return a dictionary which represents the vector
-    /*
-    return {
-        x: a.x - b.x,
-        y: a.y - b.y,
-        z: a.z - b.z
-    };
-    */
-   // return an array which represents the vector
-   const vector = [a.x - b.x, a.y - b.y, a.z - b.z]; // [x, y, z]
-   return vector;
-  }
+  function getVector(a, b) {
+    return [
+        a.x - b.x,
+        a.y - b.y,
+        a.z - b.z
+    ];
+ }
 
   // Dot product between two functions
   function dot(v1, v2) {
@@ -72,27 +66,26 @@ export const LANDMARKS = {
   export function getAngleOfJoint(landmarks, a, b, c) {
 
     // Check if landmarks a, b, c and sequential (i.e. on the same finger?)
-    if( ( ((1 <= a <= 4) && (1 <= b <= 4) && (1 <= a <= 4))         // Check if all landmarks are on THUMB
-      || ((5 <= a <= 8) && (5 <= b <= 8) && (5 <= a <= 8))          // Check if all landmarks are on INDEX
-      || ((9 <= a <= 12) && (9 <= b <= 12) && (9 <= a <= 12))       // Check if all landmarks are on MIDDLE
-      || ((13 <= a <= 16) && (13 <= b <= 16) && (13 <= a <= 16))    // Check if all landmarks are on RING
-      || ((17 <= a <= 20) && (17 <= b <= 20) && (17 <= a <= 20)) )  // Check if all landmarks are on PINKY
-       && ( ((b == a+1) && (c == b+1)) || ((a == 0) && (c == c+1)) ) )
-       {                                 // Check is all landmakrs are sequential
-      // Get the vectors from a to b, and from c to b
-    const vector1 = getVector(landmarks[a], landmarks[b]);
-    const vector2 = getVector(landmarks[c], landmarks[b]);
+    if ( ( ( ( (a == 0) || ((1 <= a) && (a <= 4)) ) && (1 <= b) && (b <= 4) && (1 <= c) && (c <= 4))       // Check if all landmarks are on THUMB
+      || ( ( (a == 0) || ((5 <= a) && (a <= 8))) && (5 <= b) && (b <= 8) && (5 <= c) && (c <= 8))          // Check if all landmarks are on INDEX
+      || ( ( (a == 0 ) || ((9 <= a) && (a <= 12))) && (9 <= b) && (b <= 12) && (9 <= c) && (c <= 12))      // Check if all landmarks are on MIDDLE
+      || ( ( (a == 0) || ((13 <= a) && (a <= 16))) && (13 <= b) && (b <= 16) && (13 <= c) && (c <= 16))    // Check if all landmarks are on RING
+      || ( ( (a == 0) || ((17 <= a) && (a <= 20))) && (17 <= b) && (b <= 20) && (17 <= c) && (c <= 20)) )  // Check if all landmarks are on PINKY
+       && ( ((b == a+1) && (c == b+1)) || ((a == 0) && (c == b+1)) ) ) {                                   // Check is all landmakrs are sequential
+        // Get the vectors from a to b, and from c to b
+        const vector1 = getVector(landmarks[a], landmarks[b]);
+        const vector2 = getVector(landmarks[c], landmarks[b]);
 
-    // Calculate the angle between vector1 and vector2, and return
-    const cosTheta = dot(vector1, vector2) / (magnitude3D(vector1) * magnitude3D(vector2));
-    return Math.acos(cosTheta)
-    //
-    /* 
-      Maybe for numerical safety should do this instead?:
-      const clamped = Math.min(1, Math.max(-1, cosTheta));
+        // Calculate the angle between vector1 and vector2, and return
+        const cosTheta = dot(vector1, vector2) / (magnitude3D(vector1) * magnitude3D(vector2));
+        return Math.acos(cosTheta)
+        //
+        /* 
+          Maybe for numerical safety should do this instead?:
+          const clamped = Math.min(1, Math.max(-1, cosTheta));
 
-    return Math.acos(clamped) * (180 / Math.PI);
-    */
+        return Math.acos(clamped) * (180 / Math.PI);
+        */
     } else {
       console.error('Argument is not valid. a, b, c, must be values between 0 and 20, and b=a+1, and c=b+1.');
     }
@@ -109,11 +102,11 @@ export function onLandmarksDetected(landmarksArray) {
     // Normalize landmarks (removes hand size & position differences)
     const normalizedLandmarks = normalizeLandmarks(landmarks);
 
-    // NEXT STEP (later):
-    // extractFeatures(normalizedLandmarks);
-}
-  // Calcul
+    const features = extractFeatures(normalizedLandmarks);
 
+    console.log(features);
+
+}
 
 // Normalized function
 function normalizeLandmarks(landmarks) {
@@ -148,4 +141,139 @@ function normalizeLandmarks(landmarks) {
     }));
 
     return normalized;
+}
+
+// Extract features
+function extractFeatures(landmarks) {
+
+    const features = {
+
+        jointAngles: {},
+        fingerDistances: {},
+        fingertipDistances: {}
+
+    };
+
+    // Extracting joint angles
+    // Thumb MCP
+    features.jointAngles.thumb_MCP =
+    getAngleOfJoint(landmarks,
+        LANDMARKS.THUMB_CMC,
+        LANDMARKS.THUMB_MCP,
+        LANDMARKS.THUMB_IP);
+      
+    // Thumb IP
+    features.jointAngles.thumb_IP =
+        getAngleOfJoint(landmarks,
+            LANDMARKS.THUMB_MCP,
+            LANDMARKS.THUMB_IP,
+            LANDMARKS.THUMB_TIP);
+    
+    // Index PIP
+    features.jointAngles.index_PIP =
+        getAngleOfJoint(landmarks,
+            LANDMARKS.INDEX_FINGER_MCP,
+            LANDMARKS.INDEX_FINGER_PIP,
+            LANDMARKS.INDEX_FINGER_DIP);
+    
+    // Index DIP
+    features.jointAngles.index_DIP =
+        getAngleOfJoint(landmarks,
+            LANDMARKS.INDEX_FINGER_PIP,
+            LANDMARKS.INDEX_FINGER_DIP,
+            LANDMARKS.INDEX_FINGER_TIP);
+      
+    // Index MCP
+    features.jointAngles.index_MCP =
+        getAngleOfJoint(landmarks,
+            LANDMARKS.WRIST,
+            LANDMARKS.INDEX_FINGER_MCP,
+            LANDMARKS.INDEX_FINGER_PIP);
+
+    // Middle PIP
+    features.jointAngles.middle_PIP =
+        getAngleOfJoint(landmarks,
+            LANDMARKS.MIDDLE_FINGER_MCP,
+            LANDMARKS.MIDDLE_FINGER_PIP,
+            LANDMARKS.MIDDLE_FINGER_DIP);
+    
+    // Middle DIP
+    features.jointAngles.middle_DIP =
+        getAngleOfJoint(landmarks,
+            LANDMARKS.MIDDLE_FINGER_PIP,
+            LANDMARKS.MIDDLE_FINGER_DIP,
+            LANDMARKS.MIDDLE_FINGER_TIP);
+
+    // Middle MCP
+    features.jointAngles.middle_MCP =
+        getAngleOfJoint(landmarks,
+            LANDMARKS.WRIST,
+            LANDMARKS.MIDDLE_FINGER_MCP,
+            LANDMARKS.MIDDLE_FINGER_PIP);
+
+    // Ring PIP
+    features.jointAngles.ring_PIP =
+        getAngleOfJoint(landmarks,
+            LANDMARKS.RING_FINGER_MCP,
+            LANDMARKS.RING_FINGER_PIP,
+            LANDMARKS.RING_FINGER_DIP);
+
+    // Ring DIP
+    features.jointAngles.ring_DIP =
+        getAngleOfJoint(landmarks,
+            LANDMARKS.RING_FINGER_PIP,
+            LANDMARKS.RING_FINGER_DIP,
+            LANDMARKS.RING_FINGER_TIP);
+
+    // Ring MCP
+    features.jointAngles.ring_MCP =
+        getAngleOfJoint(landmarks,
+            LANDMARKS.WRIST,
+            LANDMARKS.RING_FINGER_MCP,
+            LANDMARKS.RING_FINGER_PIP);
+
+    // Pinky PIP
+    features.jointAngles.pinky_PIP =
+        getAngleOfJoint(landmarks,
+            LANDMARKS.PINKY_MCP,
+            LANDMARKS.PINKY_PIP,
+            LANDMARKS.PINKY_DIP);
+
+    // Pinky DIP
+    features.jointAngles.pinky_DIP =
+        getAngleOfJoint(landmarks,
+            LANDMARKS.PINKY_PIP,
+            LANDMARKS.PINKY_DIP,
+            LANDMARKS.PINKY_TIP);
+
+    // Pinky MCP
+    features.jointAngles.pinky_MCP =
+        getAngleOfJoint(landmarks,
+            LANDMARKS.WRIST,
+            LANDMARKS.PINKY_MCP,
+            LANDMARKS.PINKY_PIP);
+
+    // Extracting finger distance
+    features.fingerDistances.thumb =
+        getDistance(landmarks[LANDMARKS.WRIST],
+                    landmarks[LANDMARKS.THUMB_TIP]);
+
+    features.fingerDistances.index =
+        getDistance(landmarks[LANDMARKS.WRIST],
+                    landmarks[LANDMARKS.INDEX_FINGER_TIP]);
+
+    features.fingerDistances.middle =
+        getDistance(landmarks[LANDMARKS.WRIST],
+                    landmarks[LANDMARKS.MIDDLE_FINGER_TIP]);
+
+    features.fingerDistances.ring =
+        getDistance(landmarks[LANDMARKS.WRIST],
+                    landmarks[LANDMARKS.RING_FINGER_TIP]);
+
+    features.fingerDistances.pinky =
+        getDistance(landmarks[LANDMARKS.WRIST],
+                    landmarks[LANDMARKS.PINKY_TIP]);
+
+
+    return features;
 }
