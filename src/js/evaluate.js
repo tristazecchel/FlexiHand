@@ -32,7 +32,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let scoreInterval = null;
     let livePercent = 0;
 
-    const TIMER_DURATION = 10; // seconds
+    const TIMER_DURATION = 15; // seconds
 
     function updateCircleProgress(pct) {
         const deg = Math.round((pct / 100) * 360);
