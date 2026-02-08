@@ -68,37 +68,34 @@ export function drawResults(canvas, video, results) {
         [5, 9], [9, 13], [13, 17] // Palm
     ];
 
-    // Green lines
+    // Draw green lines
     ctx.strokeStyle = "lime";
-    ctx.lineWidth = 3;
+    ctx.lineWidth = 2;
+
+    function getPoint(i) { // Flipping landmarks due to mirrored webcam
+        const p = landmarks[i];
+        return { x: (1 - p.x) * canvas.width, y: p.y * canvas.height };
+    }
 
     connections.forEach(([start, end]) => {
-        const startPoint = landmarks[start];
-        const endPoint = landmarks[end];
+        const p1 = getPoint(start);
+        const p2 = getPoint(end);
 
         ctx.beginPath();
-        ctx.moveTo(
-            startPoint.x * canvas.width,
-            startPoint.y * canvas.height
-        );
-
-        ctx.lineTo(
-            endPoint.x * canvas.width,
-            endPoint.y * canvas.height
-        );
+        ctx.moveTo(p1.x, p1.y);
+        ctx.lineTo(p2.x, p2.y);
         ctx.stroke();
     });
         
     // Draw dots
     ctx.fillStyle = "red"
 
-    landmarks.forEach(point => {
+    landmarks.forEach((_, i) => {
+        const p = getPoint(i);
+
         ctx.beginPath();
 
-        ctx.arc(
-            point.x * canvas.width,
-            point.y * canvas.height, 5, 0, 2 * Math.PI
-        );
+        ctx.arc(p.x, p.y, 4, 0, 2 * Math.PI);
         ctx.fill();
     });
 }
@@ -109,7 +106,6 @@ export async function runHandLandmarker(onLandmarksDetected, video) {
         return;
     }
 
-    //const video = await setupWebcam(); // Calls webcam function
     const canvas = document.getElementById("output"); // Gets canvas
     if (!canvas) {
         console.warn("Canvas element not found. Landmarks will not be drawn.");

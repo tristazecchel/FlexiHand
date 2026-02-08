@@ -4,27 +4,34 @@
     <meta charset="UTF-8">
     <title>Record Reference Gestures</title>
     <style>
-        #webcam, #output {
-          position: absolute;       /* overlay them */
-          top: 50px;                /* adjust based on your layout */
-          left: 50px;               /* adjust based on your layout */
-          width: 640px;
-          height: 480px;
-          transform: scaleX(-1);    /* flip horizontally so landmarks align */
-        }
-      
-        #output {
-          pointer-events: none;     /* so clicks pass through to buttons */
-        }
-      
-        body {
-          position: relative;       /* required for absolute positioning */
+        #webcam {
+            position: absolute;
+            top: 0;
+            left: 0;
+            transform: scaleX(-1);
         }
 
-        #webcam, #output {
+        #output {
             position: absolute;
-            top: 50px;
-            left: 50px;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+        }
+
+        #controls {
+            margin-top: 20px;
+        }
+
+        button {
+            padding: 10px;
+            margin: 5px;
+            font-size: 16px;
+        }
+
+        #cameraContainer {
+            position: relative;
+            width: 640px;
+            height:480px;
         }
       </style>
 </head>
@@ -32,15 +39,21 @@
 <body>
     <h1>Record Reference Hand Landmarks</h1>
 
-    <video id="webcam" width="640" height="480" autoplay></video>
-    <canvas id="output" width="640" height="480"></canvas>
+    <div id="cameraContainer">
+        <video id="webcam" width="640" height="480" autoplay></video>
+        <canvas id="output" width="640" height="480"></canvas>
+    </div>
     
-    <button id="btnOpenPalm">Record Open Palm</button>
-    <button id="btnClosedFist">Record Closed Fist</button>
-    <button id="btnHook">Record Hook</button>
-    <button id="btnTabletop">Record Tabletop</button>
-    <button id="btnThumbBent">Record Thumb Bent</button>
+    <div id="controls">
+        <button id="btnOpenPalm">Record Open Palm</button>
+        <button id="btnClosedFist">Record Closed Fist</button>
+        <button id="btnHook">Record Hook</button>
+        <button id="btnTabletop">Record Tabletop</button>
+        <button id="btnThumbBent">Record Thumb Bent</button>
+    </div>
 
     <script type="module" src="recordReference.js"></script>
+
+    <button id="btnPrint">Print all references</button>
 </body>
 </html>
