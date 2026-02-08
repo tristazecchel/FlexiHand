@@ -138,14 +138,43 @@ h1 {
     color: var(--text-dim);
 }
 
+/* --- REFERENCE SKELETON BOX --- */
+.reference-box {
+    position: relative;
+    width: 100%;
+    height: 200px;
+    background: rgba(0, 0, 0, 0.05);
+    border-radius: 15px;
+    margin-bottom: 12px;
+    border: 2px dashed var(--accent);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+#referenceCanvas {
+    width: 100%;
+    height: 100%;
+}
+
+.reference-label {
+    position: absolute;
+    bottom: 6px;
+    left: 12px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--accent);
+}
+
 /* --- WEBCAM VIEWPORT --- */
 .camera-box {
     position: relative;
     width: 100%;
-    height: 350px;
+    height: 500px;
     background: #000;
     border-radius: 15px;
-    margin-bottom: 25px;
+    margin-bottom: 12px;
     border: 3px solid var(--accent);
     overflow: hidden;
     transition: all 0.5s ease-in-out;
@@ -156,6 +185,30 @@ h1 {
     height: 100%;
     object-fit: cover;
     transform: scaleX(-1); /* Mirrored view for natural hand tracking */
+}
+
+#output {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    pointer-events: none;
+}
+
+.live-score {
+    position: absolute;
+    top: 12px;
+    right: 14px;
+    background: rgba(0, 0, 0, 0.55);
+    color: #fff;
+    font-size: 1.4rem;
+    font-weight: 800;
+    padding: 6px 14px;
+    border-radius: 10px;
+    pointer-events: none;
+    z-index: 3;
 }
 
 /* Scanning Animation Overlay */
@@ -184,8 +237,9 @@ h1 {
 }
 
 .progress-bar-bg {
+    position: relative;
     width: 100%;
-    height: 12px;
+    height: 18px;
     background: rgba(255, 255, 255, 0.5);
     border-radius: 10px;
     overflow: hidden;
@@ -195,7 +249,55 @@ h1 {
     width: 0%;
     height: 100%;
     background: var(--accent);
-    transition: width 0.4s ease;
+    transition: width 0.2s linear;
+}
+
+.timer-label {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 0.7rem;
+    font-weight: 700;
+    color: var(--text-dark);
+    pointer-events: none;
+}
+
+/* --- SCORING UI --- */
+.scoring-ui {
+    background: var(--card-bg);
+    backdrop-filter: blur(8px);
+    border-radius: 15px;
+    padding: 20px;
+    margin-top: 15px;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    text-align: center;
+}
+
+.scoring-ui p {
+    margin-bottom: 8px;
+    font-weight: 600;
+}
+
+.scoring-ui label {
+    display: block;
+    margin-bottom: 6px;
+    color: var(--text-dim);
+}
+
+.scoring-ui input[type="number"] {
+    width: 80px;
+    padding: 8px;
+    border: 2px solid var(--accent);
+    border-radius: 8px;
+    font-size: 1rem;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.btn-next {
+    padding: 10px 24px;
+    font-size: 0.9rem;
 }
 
 /* --- TOTAL PROGRESS CIRCLE --- */
@@ -212,8 +314,7 @@ h1 {
     width: 150px;
     height: 150px;
     border-radius: 50%;
-    border: 10px solid var(--white);
-    border-top: 10px solid var(--accent); /* Visual trick for circular progress */
+    background: conic-gradient(var(--accent) 0deg, var(--white) 0deg);
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -221,13 +322,24 @@ h1 {
     margin: 20px 0;
 }
 
+.circle-progress::before {
+    content: '';
+    position: absolute;
+    width: 130px;
+    height: 130px;
+    border-radius: 50%;
+    background: var(--card-bg);
+}
+
 .circle-progress span {
+    position: relative;
     font-size: 2rem;
     font-weight: 800;
     color: var(--accent);
 }
 
 .circle-progress small {
+    position: relative;
     font-size: 0.8rem;
     color: var(--text-dim);
     text-transform: uppercase;

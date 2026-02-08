@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Evaluate Your Flexibility</title>
     <link rel="stylesheet" href="../css/evaluate.css">
+    <script type="module" src="../js/evaluate.js"></script>
 </head>
 <body>
     <nav>
@@ -26,17 +27,29 @@
     <div class="top-row">
         <div class="card">
             <h3>Activity & Live Feed</h3>
-            
-            <div id="cameraContainer" class="camera-box" style="display: none;">
-                <video id="webcam" autoplay playsinline></video>
-                <div class="scanning-line"></div>
+
+            <div id="referenceContainer" class="reference-box" style="display: none;">
+                <canvas id="referenceCanvas"></canvas>
+                <p id="referenceLabel" class="reference-label">Reference: —</p>
             </div>
 
-            <div class="chart-container" id="activityChart"></div>
-            <p class="chart-label">Minutes practiced per day</p>
-            
+            <div id="cameraContainer" class="camera-box" style="display: none;">
+                <video id="webcam" autoplay playsinline></video>
+                <canvas id="output"></canvas>
+                <div id="liveScore" class="live-score">0%</div>
+            </div>
+
             <div class="progress-bar-bg" style="margin-top: 20px;">
                 <div class="progress-fill" id="challengeProgress"></div>
+                <span class="timer-label" id="timerLabel">10s</span>
+            </div>
+
+            <div id="scoringUI" class="scoring-ui" style="display: none;">
+                <p id="exerciseName">Exercise</p>
+                <p id="percentScore">Score: 0%</p>
+                <label for="difficultyInput">Rate difficulty (1-10):</label>
+                <input type="number" id="difficultyInput" min="1" max="10">
+                <button id="nextBtn" class="btn-flex btn-next">Next</button>
             </div>
         </div>
 
