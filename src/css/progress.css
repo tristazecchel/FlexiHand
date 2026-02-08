@@ -242,3 +242,10 @@ nav {
     font-size: 13px;
     color: #d9534f;
 }
+
+#white {
+    background-color:var(--card-bg);
+    border-radius: 15px;
+    padding: 10px;
+    margin-bottom: 10px;
+}

@@ -1,16 +1,4 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // Initialize Chart Bars
-    const chartContainer = document.getElementById('activityChart');
-    const weeklyData = [15, 40, 25, 60, 35, 10, 50];
-
-    weeklyData.forEach(value => {
-        const bar = document.createElement('div');
-        bar.className = 'bar';
-        bar.style.height = '0%';
-        chartContainer.appendChild(bar);
-        setTimeout(() => { bar.style.height = value + '%'; }, 200);
-    });
-
     // ---- Exercise Recommendation Logic ----
 
     // Maps each test exercise to its recommended exercise info
