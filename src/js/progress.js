@@ -11,33 +11,6 @@ document.addEventListener('DOMContentLoaded', () => {
         setTimeout(() => { bar.style.height = value + '%'; }, 200);
     });
 
-    // Webcam Toggle Logic
-    const flexBtn = document.getElementById('flexBtn');
-    const cameraContainer = document.getElementById('cameraContainer');
-    const video = document.getElementById('webcam');
-
-    let stream = null;
-
-    flexBtn.addEventListener('click', async () => {
-        if (!stream) {
-            try {
-                stream = await navigator.mediaDevices.getUserMedia({ video: true });
-                video.srcObject = stream;
-                cameraContainer.style.display = 'block';
-                flexBtn.innerText = "Stop";
-                flexBtn.style.background = "#ff4757";
-            } catch (err) {
-                alert("Camera access denied.");
-            }
-        } else {
-            stream.getTracks().forEach(track => track.stop());
-            stream = null;
-            cameraContainer.style.display = 'none';
-            flexBtn.innerText = "Start Flexing";
-            flexBtn.style.background = "var(--accent)";
-        }
-    });
-
     // ---- Exercise Recommendation Logic ----
 
     // Maps each test exercise to its recommended exercise info

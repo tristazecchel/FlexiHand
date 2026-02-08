@@ -14,8 +14,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const timerLabel = document.getElementById('timerLabel');
     const percentLabel = document.getElementById('totalPercent');
     const circleProgress = document.querySelector('.circle-progress');
-    const settingsBtn = document.getElementById('settingsBtn');
-
     const liveScoreEl = document.getElementById('liveScore');
     const scoringUI = document.getElementById('scoringUI');
     const exerciseNameEl = document.getElementById('exerciseName');
@@ -221,11 +219,6 @@ document.addEventListener('DOMContentLoaded', () => {
         startNextTest();
     });
 
-    // Settings button click
-    settingsBtn.addEventListener('click', () => {
-        alert("Settings panel will open here!");
-    });
-
     // Flexing button logic
     flexBtn.addEventListener('click', async () => {
         if (!stream) {
@@ -251,6 +244,20 @@ document.addEventListener('DOMContentLoaded', () => {
             } catch (err) {
                 alert("Camera access is required to Start Flexing.");
             }
+        } else {
+            // Stop flexing — reset everything and return to idle state
+            stopTimer();
+            scoringUI.style.display = 'none';
+            liveScoreEl.style.display = 'none';
+            cameraContainer.style.display = 'none';
+            referenceContainer.style.display = 'none';
+            currentTestIndex = 0;
+            results = [];
+            updateCircleProgress(0);
+            flexBtn.innerText = "Start Flexing";
+            flexBtn.style.background = '';
+            stream.getTracks().forEach(t => t.stop());
+            stream = null;
         }
     });
 
@@ -304,19 +311,4 @@ document.addEventListener('DOMContentLoaded', () => {
         stream = null;
     }
 }
-
-        // Reset
-        currentTestIndex = 0;
-        results = [];
-        cameraContainer.style.display = 'none';
-        referenceContainer.style.display = 'none';
-        updateCircleProgress(0);
-
-        flexBtn.innerText = "Start Flexing";
-        flexBtn.style.background = '';
-        if (stream) {
-            stream.getTracks().forEach(t => t.stop());
-            stream = null;
-        }
-    }
-);
+});

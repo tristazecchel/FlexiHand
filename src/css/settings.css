@@ -33,30 +33,46 @@ nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 15px 40px;
-    background: rgba(255, 255, 255, 0.6);
+    padding: 12px 40px;
+    background: var(--card-bg);
     backdrop-filter: blur(10px);
+    border-radius: 15px;
+    margin-bottom: 40px;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
 }
 
 .nav-links {
-    margin-left: auto;
-    margin: 0 15px;
     display: flex;
-    align-items: center;
+    gap: 10px;
+    background: rgba(255, 255, 255, 0.3);
+    padding: 5px;
+    border-radius: 50px;
 }
 
 .logo {
-    font-size: 20px;
+    font-size: 24px;
     font-weight: 800;
-    color: #0bb7a7;
+    color: var(--accent);
+    letter-spacing: -0.5px;
 }
 
-.nav-right a {
+.nav-item {
     text-decoration: none;
-    color: #0f2f33;
-    padding: 8px 18px;
-    border-radius: 30px;
+    color: var(--text-dark);
     font-weight: 600;
+    padding: 8px 22px;
+    border-radius: 50px;
+    transition: all 0.3s ease;
+}
+
+.nav-item:hover {
+    background: rgba(255, 255, 255, 0.5);
+}
+
+.nav-item.active {
+    background: var(--accent);
+    color: white;
 }
 
 /*
