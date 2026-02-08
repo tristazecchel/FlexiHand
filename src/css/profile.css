@@ -1,0 +1,122 @@
+* {
+    box-sizing: border-box;
+    font-family: "Segoe UI", sans-serif;
+}
+
+body {
+    margin: 0;
+    background: #0f1a1f;
+    color: white;
+}
+
+/* NAV */
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 40px;
+    background: #1b2b32;
+}
+
+.logo {
+    font-weight: 800;
+    color: #3affc9;
+}
+
+.nav-links a {
+    margin: 0 10px;
+    text-decoration: none;
+    color: #cfd8dc;
+    padding: 6px 14px;
+    border-radius: 10px;
+}
+
+.nav-links .active {
+    background: #263c44;
+}
+
+#logoutBtn {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+/* PROFILE */
+.profile-container {
+    text-align: center;
+    margin-top: 50px;
+}
+
+.avatar-wrapper {
+    position: relative;
+    width: 140px;
+    margin: auto;
+}
+
+.avatar-wrapper img {
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    border: 4px solid #2dd4bf;
+}
+
+.camera-btn {
+    position: absolute;
+    bottom: 5px;
+    right: 5px;
+    background: #2dd4bf;
+    color: black;
+    border-radius: 50%;
+    padding: 6px;
+    cursor: pointer;
+}
+
+.email {
+    color: #9fb3ba;
+    margin-bottom: 30px;
+}
+
+/* STATS */
+.stats {
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+    margin-bottom: 40px;
+}
+
+.stat-card {
+    background: #1b2b32;
+    padding: 25px;
+    width: 180px;
+    border-radius: 15px;
+    border: 1px solid #2a424b;
+}
+
+.stat-card h3 {
+    margin: 10px 0;
+    color: #3affc9;
+}
+
+/* ACHIEVEMENTS */
+.ach-title {
+    text-align: left;
+    margin-left: 18%;
+}
+
+.achievements {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    max-width: 900px;
+    margin: auto;
+}
+
+.badge {
+    background: #1b2b32;
+    padding: 20px;
+    border-radius: 15px;
+    text-align: center;
+    opacity: 0.4;
+}

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>SignLingo – Profile</title>
+    <link rel="stylesheet" href="../css/profile.css">
+</head>
+<body>
+
+<nav>
+    <div class="logo">🧏‍♀️ SignLingo</div>
+    <div class="nav-links">
+        <a href="#">Learn</a>
+        <a href="#">Progress</a>
+        <a href="#" class="active">Profile</a>
+    </div>
+    <button id="logoutBtn">⚙️</button>
+</nav>
+
+<main class="profile-container">
+
+    <div class="avatar-wrapper">
+        <img id="profilePic" src="https://via.placeholder.com/150">
+        <label class="camera-btn">
+            📷
+            <input type="file" id="imageInput" hidden>
+        </label>
+    </div>
+
+    <h2>@ta.zecchel</h2>
+    <p class="username">username</p>
+
+    <section class="stats">
+        <div class="stat-card">
+            🔥
+            <h3 id="streak">0</h3>
+            <span>Day Streak</span>
+        </div>
+        <div class="stat-card">
+            ✋
+            <h3 id="signs">0</h3>
+            <span>Signs Learned</span>
+        </div>
+        <div class="stat-card">
+            📚
+            <h3 id="lessons">0</h3>
+            <span>Lessons Complete</span>
+        </div>
+    </section>
+
+    <h3 class="ach-title">Achievements</h3>
+
+    <section class="achievements">
+       
+        <div class="badge locked">🔥<p>Week Streak</p></div>
+       
+        <div class="badge locked">🏆<p>30 Day Streak</p></div>
+    </section>
+
+</main>
+
+<script src="../js/profile.js"></script>
+</body>
+</html>
