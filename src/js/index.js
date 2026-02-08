@@ -1,3 +1,5 @@
+import { auth } from "../../firebase/firebase.js";
+import {signOut} from "firebase/auth";
 document.addEventListener('DOMContentLoaded', () => {
     
     // LOGIN BUTTON
@@ -19,11 +21,18 @@ document.addEventListener('DOMContentLoaded', () => {
     // LOG OUT BUTTON
     const logoutBtn = document.getElementById('logoutBtn');
     if (logoutBtn) {
-        logoutBtn.addEventListener('click', () => {
+        logoutBtn.addEventListener('click', async() => {
             const confirmLogout = confirm("Are you sure you want to log out?");
             if (confirmLogout) {
-                alert("Logging out...");
-                // Later we’ll add Firebase signOut here
+                try{
+                    await signOut(auth);
+                    alert("Log out successful!");
+                    window.location.href= "/src/html/index.html";
+                }
+                catch (error){
+                    console.error("Logout failed: ", error.message);
+                }
+                
             }
         });
     }
