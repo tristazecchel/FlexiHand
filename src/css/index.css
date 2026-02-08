@@ -118,10 +118,7 @@ h4 {
 .card-green { background-color: #065f46; }
 .card-light-blue { background-color: #3b82f6; }
 
-.icon {
-    font-size: 3rem;
-    margin-bottom: 10px;
-}
+
 .auth-buttons {
     display: flex;
     align-items: center;
