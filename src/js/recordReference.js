@@ -3,32 +3,35 @@ import { normalizeLandmarks } from './gesture.js';
 
 
 let videoElement;
+let latestLandmarks = null;
 
-// Initialize webcam on page load
-async function initWebcam() {
-    videoElement = await setupWebcam(); // this attaches stream to #webcam
+async function init() { // Starting MediaPipe loop
+    videoElement = await setupWebcam();
+
+    runHandLandmarker((landmarksArray) => {
+        if (landmarksArray.length > 0) {
+            latestLandmarks = landmarksArray[0];
+        }
+    }, videoElement);
 }
-initWebcam();
+
+init();
 
 // Record reference function
 export function recordReference(exerciseName) {
-    console.log(`Perform the exercise: ${exerciseName}`);
 
-    runHandLandmarker((landmarksArray) => {
-        const landmarks = landmarksArray[0]; // first detected hand
-        if (!landmarks) {
-            console.warn("No hand detected. Try again.");
-            return;
-        }
+    if (!latestLandmarks) {
+        console.warn("No hand detected. Try again.");
+        return;
+    }
 
-        const normalized = normalizeLandmarks(landmarks);
+    const normalized = normalizeLandmarks(latestLandmarks);
 
-        console.log(`Normalized landmarks for ${exerciseName}:`);
-        console.log(JSON.stringify(normalized, null, 2));
+    console.log(`Captured for ${exerciseName}`);
+    console.log(JSON.stringify(normalized, null, 2));
 
-        // Stop after logging 1 frame
-        alert(`Captured reference landmarks for ${exerciseName}. Check the console.`);
-    }, videoElement);
+    // Stop after logging 1 frame
+    alert(`Captured reference landmarks for ${exerciseName}. Check the console.`);
 }
 
 window.recordReference = recordReference;

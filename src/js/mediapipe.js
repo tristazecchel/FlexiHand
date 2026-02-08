@@ -45,21 +45,62 @@ export async function setupWebcam() {
 
 // Drawing landmarks
 export function drawResults(canvas, video, results) {
-    if (!canvas) return; // Checking if canvas is working
+    if (!canvas || !video) return; // Checking if canvas is working
 
     const ctx = canvas.getContext("2d");
-    ctx.clearRect(0, 0, canvas.width, canvas.height); // Clears entire canvas
-    ctx.drawImage(video, 0, 0, canvas.width, canvas.height); // Draw
 
-    if (results.landmarks && results.landmarks.length > 0) { // Checking if 1 hand is detected
-        // Results.landmark: array of type "hands" that each has "x, y, z" -> holds the coordinates of each landmark
-        ctx.fillStyle = "red" // Dots are red
-        results.landmark[0].forEach((point) => { // Only for the first detected hand, goes through all landmarks
-            ctx.beginPath();
-            ctx.arc(point.x * canvas.width, point.y * canvas.height, 5, 0, 2 * Math.PI); // Draws a circle at each landmark
-            ctx.fill();
-        });
-    }
+    canvas.width = video.videoWidth;
+    canvas.height = video.videoHeight;
+
+    ctx.clearRect(0, 0, canvas.width, canvas.height); // Clears entire canvas
+
+    if (!results.landmarks || results.landmarks.length == 0) return; // Checking if 1 hand is detected
+    // Results.landmark: array of type "hands" that each has "x, y, z" -> holds the coordinates of each landmark
+    const landmarks = results.landmarks[0];
+
+    // Connections between landmarks
+    const connections = [
+        [0, 1], [1, 2], [2, 3], [3, 4], // Thumb
+        [0, 5], [5, 6], [6, 7], [7, 8], // Index
+        [0, 9], [9, 10], [10, 11], [11, 12], // Middle
+        [0, 13], [13, 14], [14, 15], [15, 16], // Ring
+        [0, 17], [17, 18], [18, 19], [19, 20], // Pinky
+        [5, 9], [9, 13], [13, 17] // Palm
+    ];
+
+    // Green lines
+    ctx.strokeStyle = "lime";
+    ctx.lineWidth = 3;
+
+    connections.forEach(([start, end]) => {
+        const startPoint = landmarks[start];
+        const endPoint = landmarks[end];
+
+        ctx.beginPath();
+        ctx.moveTo(
+            startPoint.x * canvas.width,
+            startPoint.y * canvas.height
+        );
+
+        ctx.lineTo(
+            endPoint.x * canvas.width,
+            endPoint.y * canvas.height
+        );
+        ctx.stroke();
+    });
+        
+    // Draw dots
+    ctx.fillStyle = "red"
+
+    landmarks.forEach(point => {
+        ctx.beginPath();
+
+        ctx.arc(
+            point.x * canvas.width,
+            point.y * canvas.height, 5, 0, 2 * Math.PI
+        );
+        ctx.fill();
+    });
 }
 
 export async function runHandLandmarker(onLandmarksDetected, video) {
@@ -72,6 +113,7 @@ export async function runHandLandmarker(onLandmarksDetected, video) {
     const canvas = document.getElementById("output"); // Gets canvas
     if (!canvas) {
         console.warn("Canvas element not found. Landmarks will not be drawn.");
+        return;
     }
     const handLandmarker = await createHandLandmarker(); // Loading MediaPipe Hand Landmark model
 
