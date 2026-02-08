@@ -3,19 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SignLingo - Settings</title>
+    <title>Evaluate Your Flexibility</title>
     <link rel="stylesheet" href="../css/settings.css">
 </head>
 <body>
     <nav class="navbar">
-        <div class="logo">
-            <img src="logo.png" alt="SignLingo Logo" class="logo-img">
-            <span>SignLingo</span>
-        </div>
+        <div class="logo">🌊 FlexiHand</div>
         <div class="nav-links">
-            <a href="#">Learn</a>
-            <a href="#">Progress</a>
-            <a href="#">Profile</a>
+            <a href="#" class="nav-item active">Learn</a>
+            <a href="#" class="nav-item">Progress</a>
+            <a href="#" class="nav-item">Profile</a>
         </div>
         <div class="settings-icon">⚙️</div>
     </nav>
@@ -26,42 +23,46 @@
         <section class="settings-group">
             <h3>Account</h3>
             <div class="input-card">
-                <div class="field">
-                    <label>Email</label>
-                    <input type="email" value="example@gmail.com" readonly>
-                </div>
-                <div class="field">
-                    <label>Password</label>
-                    <input type="password" value="********" readonly>
-                </div>
-                <div class="field">
-                    <label>Username</label>
-                    <input type="text" value="@user" readonly>
-                </div>
+                <form id="form1" action="/submit1" method="post">
+                    <div class="field">
+                        <label>Username</label>
+                        <input type="text" id="username" name="username" value="username">
+                    </div>
+                    <div class="field">
+                        <label>Email</label>
+                        <input type="email" id="email" name="email" value="address@domain.xyz">
+                    </div>
+                    <div class="field">
+                        <label>Password</label>
+                        <input type="password" id="password" name="password" value="********">
+                    </div>
+                </form>
             </div>
         </section>
 
         <section class="settings-group">
             <h3>Learning Preferences</h3>
             <div class="input-card">
-                <div class="field row">
-                    <div class="label-group">
-                        <label>Daily Goal</label>
-                        <p class="subtext">How many lessons per day</p>
+                <form>
+                    <div class="field row">
+                        <div class="label-group">
+                            <label>Daily Goal</label>
+                            <p class="subtext">How many lessons per day</p>
+                        </div>
+                        <select id="dailyGoal">
+                            <option value="1">Casual (1 lesson)</option>
+                            <option value="3">Regular (3 lessons)</option>
+                            <option value="5">Serious (5 lessons)</option>
+                        </select>
                     </div>
-                    <select id="dailyGoal">
-                        <option value="1">Casual (1 lesson)</option>
-                        <option value="3">Regular (3 lessons)</option>
-                        <option value="5">Serious (5 lessons)</option>
-                    </select>
-                </div>
-                <div class="field row">
-                    <div class="label-group">
-                        <label>Reminder Time</label>
-                        <p class="subtext">Daily practice reminder</p>
+                    <div class="field row">
+                        <div class="label-group">
+                            <label>Reminder Time</label>
+                            <p class="subtext">Daily practice reminder</p>
+                        </div>
+                        <input type="time" value="09:00">
                     </div>
-                    <input type="time" value="09:00">
-                </div>
+                </form>
             </div>
         </section>
 

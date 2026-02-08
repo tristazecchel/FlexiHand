@@ -5,8 +5,8 @@
 
 body {
     margin: 0;
-    background: #0f1a1f;
-    color: white;
+    background: linear-gradient(135deg, #e0f7f6, #b2ecea);
+    color: #0f2f33;
 }
 
 /* NAV */
@@ -15,31 +15,40 @@ nav {
     justify-content: space-between;
     align-items: center;
     padding: 15px 40px;
-    background: #1b2b32;
+    background: rgba(255, 255, 255, 0.6);
+    backdrop-filter: blur(10px);
 }
 
 .logo {
+    font-size: 20px;
     font-weight: 800;
-    color: #3affc9;
+    color: #0bb7a7;
 }
 
-.nav-links a {
-    margin: 0 10px;
+.nav-right {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.nav-right a {
     text-decoration: none;
-    color: #cfd8dc;
-    padding: 6px 14px;
-    border-radius: 10px;
+    color: #0f2f33;
+    padding: 8px 18px;
+    border-radius: 30px;
+    font-weight: 600;
 }
 
-.nav-links .active {
-    background: #263c44;
+.nav-right .active {
+    background: #20b2aa;
+    color: white;
 }
 
 #logoutBtn {
-    background: none;
+    background: rgba(255,255,255,0.6);
     border: none;
-    color: white;
-    font-size: 18px;
+    padding: 8px 12px;
+    border-radius: 50%;
     cursor: pointer;
 }
 
@@ -59,22 +68,23 @@ nav {
     width: 140px;
     height: 140px;
     border-radius: 50%;
-    border: 4px solid #2dd4bf;
+    border: 4px solid white;
+    object-fit: cover;
 }
 
 .camera-btn {
     position: absolute;
     bottom: 5px;
     right: 5px;
-    background: #2dd4bf;
-    color: black;
+    background: #20b2aa;
+    color: white;
     border-radius: 50%;
     padding: 6px;
     cursor: pointer;
 }
 
 .email {
-    color: #9fb3ba;
+    color: #2d4a49;
     margin-bottom: 30px;
 }
 
@@ -87,22 +97,23 @@ nav {
 }
 
 .stat-card {
-    background: #1b2b32;
+    background: rgba(255,255,255,0.6);
     padding: 25px;
     width: 180px;
     border-radius: 15px;
-    border: 1px solid #2a424b;
+    border: 1px solid rgba(255,255,255,0.5);
 }
 
 .stat-card h3 {
     margin: 10px 0;
-    color: #3affc9;
+    color: #0bb7a7;
 }
 
 /* ACHIEVEMENTS */
 .ach-title {
     text-align: left;
-    margin-left: 18%;
+    max-width: 900px;
+    margin: 0 auto 15px;
 }
 
 .achievements {
@@ -114,9 +125,10 @@ nav {
 }
 
 .badge {
-    background: #1b2b32;
+    background: rgba(255,255,255,0.55);
     padding: 20px;
     border-radius: 15px;
     text-align: center;
-    opacity: 0.4;
+    opacity: 0.5;
 }
+
