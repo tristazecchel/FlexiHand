@@ -51,7 +51,7 @@ export function drawResults(canvas, video, results) {
     ctx.clearRect(0, 0, canvas.width, canvas.height); // Clears entire canvas
     ctx.drawImage(video, 0, 0, canvas.width, canvas.height); // Draw
 
-    if (results.landmarks && results.landmark.length > 0) { // Checking if 1 hand is detected
+    if (results.landmarks && results.landmarks.length > 0) { // Checking if 1 hand is detected
         // Results.landmark: array of type "hands" that each has "x, y, z" -> holds the coordinates of each landmark
         ctx.fillStyle = "red" // Dots are red
         results.landmark[0].forEach((point) => { // Only for the first detected hand, goes through all landmarks
@@ -62,15 +62,23 @@ export function drawResults(canvas, video, results) {
     }
 }
 
-export async function runHandLandmarker(onLandmarksDetected) {
-    const video = await setupWebcam(); // Calls webcam function
+export async function runHandLandmarker(onLandmarksDetected, video) {
+    if (!video) {
+        console.error("No video element found");
+        return;
+    }
+
+    //const video = await setupWebcam(); // Calls webcam function
     const canvas = document.getElementById("output"); // Gets canvas
+    if (!canvas) {
+        console.warn("Canvas element not found. Landmarks will not be drawn.");
+    }
     const handLandmarker = await createHandLandmarker(); // Loading MediaPipe Hand Landmark model
 
     // Run detection
     async function onFrame() {
         const results = handLandmarker.detectForVideo(video, Date.now()); // Runs hand detection on the current video frame
-        if (canvas) drawResults(canvas, results); // Calls drawing function
+        if (canvas) drawResults(canvas, video, results); // Calls drawing function
 
         if (results.landmarks && results.landmarks.length > 0) {
             onLandmarksDetected(results.landmarks);

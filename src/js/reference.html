@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Record Reference Gestures</title>
+    <style>
+        #webcam, #output {
+          transform: scaleX(-1); /* flip horizontally */
+        }
+      </style>
+</head>
+<body>
+    <h1>Record Reference Hand Landmarks</h1>
+
+    <video id="webcam" width="640" height="480" autoplay></video>
+    <canvas id="output" width="640" height="480"></canvas>
+    
+    <button id="btnOpenPalm">Record Open Palm</button>
+    <button id="btnClosedFist">Record Closed Fist</button>
+    <button id="btnHook">Record Hook</button>
+    <button id="btnTabletop">Record Tabletop</button>
+    <button id="btnThumbBent">Record Thumb Bent</button>
+
+    <script type="module" src="recordReference.js"></script>
+</body>
+</html>

@@ -109,7 +109,7 @@ export function onLandmarksDetected(landmarksArray) {
 }
 
 // Normalized function
-function normalizeLandmarks(landmarks) {
+export function normalizeLandmarks(landmarks) {
 
     // Use wrist as origin
     const wrist = landmarks[LANDMARKS.WRIST];
