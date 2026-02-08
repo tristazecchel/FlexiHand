@@ -33,7 +33,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let scoreInterval = null;
     let livePercent = 0;
 
-    const TIMER_DURATION = 15; // seconds
+    const TIMER_DURATION = 10; // seconds
 
     function updateCircleProgress(pct) {
         const deg = Math.round((pct / 100) * 360);
@@ -261,6 +261,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     alert('Evaluation complete! Check console for results.');
     console.log('Evaluation Results:', results);
+
+    // Save results to localStorage so the Progress tab can read them
+    localStorage.setItem('evaluationResults', JSON.stringify(results));
 
     console.log("FINISH EVALUATION CALLED");
     console.log("Current user:", auth.currentUser);
