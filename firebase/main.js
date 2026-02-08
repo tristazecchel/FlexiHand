@@ -110,7 +110,7 @@ if(loginForm){
 
     if (forgotButton){
         forgotButton.addEventListener("click",()=>{
-            window.location.href = "/forgot_password.html";
+            window.location.href = "/src/html/forgotpassword.html";
         })
     }
     }
