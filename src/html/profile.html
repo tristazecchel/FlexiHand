@@ -2,25 +2,26 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Flexihand – Profile</title>
+    <title>FlexiHand – Profile</title>
     <link rel="stylesheet" href="../css/profile.css">
 </head>
 <body>
 
 <nav>
-    <div class="logo">🧏‍♀️ Flexihand</div>
-    <div class="nav-links">
-        <a href="#">Learn</a>
+    <div class="logo">🌊 FlexiHand</div>
+
+    <div class="nav-right">
+        <a href="#">Evaluate</a>
         <a href="#">Progress</a>
         <a href="#" class="active">Profile</a>
+        <button id="logoutBtn">⚙️</button>
     </div>
-    <button id="logoutBtn">⚙️</button>
 </nav>
 
 <main class="profile-container">
 
     <div class="avatar-wrapper">
-        <img id="profilePic" src="https://via.placeholder.com/150">
+        <img id="profilePic" src="https://via.placeholder.com/150" alt="Profile Picture">
         <label class="camera-btn">
             📷
             <input type="file" id="imageInput" hidden>
@@ -28,7 +29,7 @@
     </div>
 
    
-    <p class="username">username</p>
+    <p class="email">username</p>
 
     <section class="stats">
         <div class="stat-card">
@@ -36,25 +37,21 @@
             <h3 id="streak">0</h3>
             <span>Day Streak</span>
         </div>
+
         <div class="stat-card">
-            ✋
-            <h3 id="signs">0</h3>
-            <span>Signs Learned</span>
-        </div>
-        <div class="stat-card">
-            📚
-            <h3 id="lessons">0</h3>
-            <span>Lessons Complete</span>
+            📊
+            <h3 id="evaluations">0</h3>
+            <span>Evaluations</span>
         </div>
     </section>
 
     <h3 class="ach-title">Achievements</h3>
 
     <section class="achievements">
-       
+        <div class="badge locked">✋<p>100 Evaluations</p></div>
         <div class="badge locked">🔥<p>Week Streak</p></div>
-       
-        <div class="badge locked">🏆<p>30 Day Streak</p></div>
+        
+        
     </section>
 
 </main>

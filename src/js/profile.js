@@ -2,11 +2,13 @@ document.addEventListener("DOMContentLoaded", () => {
     const imageInput = document.getElementById("imageInput");
     const profilePic = document.getElementById("profilePic");
 
-    // Load saved image
-    const saved = localStorage.getItem("profileImage");
-    if (saved) profilePic.src = saved;
+    /* Load saved profile image */
+    const savedImage = localStorage.getItem("profileImage");
+    if (savedImage) {
+        profilePic.src = savedImage;
+    }
 
-    // Upload new image
+    /* Upload new profile image */
     imageInput.addEventListener("change", () => {
         const file = imageInput.files[0];
         if (!file) return;
@@ -19,8 +21,8 @@ document.addEventListener("DOMContentLoaded", () => {
         reader.readAsDataURL(file);
     });
 
-    // Example values (can be replaced with real data)
+    /* Example dynamic values */
     document.getElementById("streak").textContent = 0;
-    document.getElementById("signs").textContent = 0;
-    document.getElementById("lessons").textContent = 0;
+    document.getElementById("evaluations").textContent = 0;
 });
+
