@@ -79,6 +79,7 @@ nav {
 .avatar-wrapper {
     position: relative;
     width: 140px;
+    height: 140px;
     margin: auto;
 }
 
@@ -88,6 +89,17 @@ nav {
     border-radius: 50%;
     border: 4px solid var(--white);
     object-fit: cover;
+}
+
+.default-avatar {
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    border: 4px solid var(--white);
+    background: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .camera-btn {

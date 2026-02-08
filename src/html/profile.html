@@ -21,15 +21,16 @@
 <main class="profile-container">
 
     <div class="avatar-wrapper">
-        <img id="profilePic" src="https://via.placeholder.com/150" alt="Profile Picture">
+        <div id="defaultAvatar" class="default-avatar"></div>
+        <img id="profilePic" alt="Profile Picture" style="display:none;">
         <label class="camera-btn">
             📷
             <input type="file" id="imageInput" hidden>
         </label>
     </div>
 
-   
-    <p class="email">username</p>
+
+    <p class="email" id="userEmail">username</p>
 
     <section class="stats">
         <div class="stat-card">
@@ -56,6 +57,6 @@
 
 </main>
 
-<script src="../js/profile.js"></script>
+<script type="module" src="../js/profile.js"></script>
 </body>
 </html>
